@@ -88,8 +88,11 @@ int	f_find_max(int a, int b);
 int f_var_checker(char *ptr, t_par *par);
 char *f_env_ind(int ind, t_par **par);
 int f_env_val_chk(char *val);
-
-
+/*20230128*/
+void    f_chk_3(char *ptr, t_node **temp);
+void    f_chk_4(char *ptr, t_node **temp, t_par **par);
+void    f_chk_5(char *ptr, t_node **temp);
+void    f_chk_6(char *ptr, t_node **temp, t_par **par);
 
 
 

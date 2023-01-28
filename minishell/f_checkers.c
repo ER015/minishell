@@ -21,38 +21,17 @@ void f_checker_1(t_par **par)
             else
                ptr = temp->next->token;
 			tmp_chk = ptr;
-			if (f_var_checker(ptr, *par) == -3 || f_var_checker(ptr, *par) == -2)
-                temp->fd = open(ptr, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			if (f_var_checker(ptr, *par) == -2)
+                f_chk_3(ptr, &temp);
             else if (f_var_checker(ptr, *par) == -1)
-                printf("%s :ambigious redirect\n",ptr);
+                printf("%s :ambiguous redirect\n",ptr);
             else if (f_var_checker(ptr, *par) >= 0)
-            {
-                tmp_chk = f_env_ind(f_var_checker(ptr, *par), par);
-                printf("%s\n",tmp_chk);
-                if (!f_env_val_chk(tmp_chk))
-                    temp->fd = open(tmp_chk, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-                else 
-                    printf("%s :Is a directory\n",tmp_chk);
-            }
-
-
-
-			//else if (f_var_checker(ptr, *par) = -2)
-			//	temp->fd = open(ptr, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-			//else if (f_var_checker(ptr, *par) = -2)
-			//	ptr = f_env_ind(f_var_checker(ptr, *par), par);
-			//if (!f_env_val_chk(ptr))
-            //	temp->fd = open(ptr, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-			//else
-			//	temp->fd = open(tmp_chk, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-				//printf("%s :Is a directory\n",tmp_chk);
-			
+                f_chk_4(ptr, &temp, par);
         }
         temp = temp->next;
     }
-    //stugum enq 5, 6, 7, 4, 9 TYPE CHLINI HETEVIC EKACOX@ NOR ENQ VERCNUM
-    //VERCNUM  
 }
+
 
 void f_checker_2(t_par **par)
 {
@@ -69,13 +48,13 @@ void f_checker_2(t_par **par)
                 ptr = temp->next->next->token;
             else
                ptr = temp->next->token;
-			if (f_var_checker(ptr, *par) >= 0)
-				tmp_chk = f_env_ind(f_var_checker(ptr, *par), par);
-			if (!f_env_val_chk(tmp_chk))
-				temp->fd = open(tmp_chk, O_WRONLY | O_APPEND | O_CREAT, 0644);
-			else
-            	temp->fd = open(ptr, O_WRONLY | O_APPEND | O_CREAT, 0644);
-				//printf("%s :Is a directory\n",tmp_chk);
+			tmp_chk = ptr;
+			if (f_var_checker(ptr, *par) == -2)
+                f_chk_5(ptr, &temp);
+            else if (f_var_checker(ptr, *par) == -1)
+                printf("%s :ambiguous redirect\n",ptr);
+            else if (f_var_checker(ptr, *par) >= 0)
+                f_chk_6(ptr, &temp, par);
         }
         temp = temp->next;
     }

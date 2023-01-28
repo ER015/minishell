@@ -16,12 +16,11 @@ int f_var_checker(char *ptr, t_par *par)
 	int num;
 	char *temp;
 
-	temp = ptr;
-	if (*temp == '$')
+	temp = ptr + 1;
+	if (*(temp - 1) == '$')
 	{
-		if (*(temp + 1) == ' ')
+		if (*temp == ' ' || *temp == '\0')
 			return (-2);
-		temp = temp + 1;
 		p_len = ft_strlen(temp);
 		env = *par->env;
 		while (env != NULL)
@@ -35,20 +34,18 @@ int f_var_checker(char *ptr, t_par *par)
 		return (-1);
 	}
 	else
-		return (-3);
+		return (-2);
 }
 
 char *f_env_ind(int ind, t_par **par)
 {
 	t_env *env;
+	
 	env = *((*par)->env);
 	while (env != NULL)
 	{
 		if (env->ind == ind)
-		{
-			if (!f_env_val_chk(env->value))
 				return (env->value);
-		}
 		env = env->next;
 	}
 	
