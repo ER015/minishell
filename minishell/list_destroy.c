@@ -48,7 +48,28 @@ void	ft_env_del(t_env **env)
 
 void	struct_free(t_par *par)
 {
+	fd_clear(par->list);
 	ft_stack_del(par->list);
 	ft_env_del(par->env);
 	//free(par);
+}
+
+void	fd_clear(t_node **list)
+{
+	t_node	*temp;
+
+	temp = *list;
+	while (temp != NULL)
+	{
+		if (temp->fd >= 0)
+		{
+			close(temp->fd);
+			if (temp->f_name != NULL)
+			{
+				unlink(temp->f_name);
+				free(list->f_name);
+			}
+		}
+		temp = temp->next;
+	}
 }

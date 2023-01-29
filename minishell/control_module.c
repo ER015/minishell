@@ -32,6 +32,7 @@ int main_control(char **envp, char *line)
 /*Продалжение контроллера*/
 int control_1(t_par *par)
 {
+	f_h_doc(&par);
 	f_checker_1(&par);
 	f_checker_2(&par);
 	printer_1(*par->list);

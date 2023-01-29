@@ -10,6 +10,10 @@
 
 /* 20221224 структура для хранения отдельных токенов(частей строки)*/
 
+typedef struct s_h_ret{
+int		fd;
+char	*f_name;
+}t_h_ret;
 
 typedef struct s_env{
     struct s_env    *prev;
@@ -27,6 +31,7 @@ typedef struct s_node{
     int             prior;
     char            *token;
     int             fd;
+	char*			f_name;
 }   t_node;
 
 typedef struct s_par{
@@ -93,6 +98,10 @@ void    f_chk_3(char *ptr, t_node **temp);
 void    f_chk_4(char *ptr, t_node **temp, t_par **par);
 void    f_chk_5(char *ptr, t_node **temp);
 void    f_chk_6(char *ptr, t_node **temp, t_par **par);
+/*20230129*/
+void f_h_doc(t_par **par);
+t_h_ret f_h_read(t_par **par, char *dlmt);
+char *f_h_cr_nm(void);
 
 
 
@@ -120,6 +129,7 @@ void	ft_stack_del(t_node **stack);
 void	ft_env_del(t_env **env);
 void	ft_env_del_node(t_env *node);
 void	struct_free(t_par *par);
+void	fd_clear(t_node **list);
 
 
 /*PRINT_TEST*/

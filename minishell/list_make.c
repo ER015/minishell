@@ -10,6 +10,7 @@ t_node	*ft_lstnew(int type, char *token)
     ptr->type = type;
     ptr->token = token;
 	ptr->ind = -1;
+	ptr->f_name = NULL;
 	ptr->prev = NULL;
 	ptr->next = NULL;
 	return (ptr);

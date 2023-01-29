@@ -7,7 +7,7 @@ void printer_1(t_node *temp)
     lst = temp;
     while (lst != NULL)
     {
-        printf("token:%s\t\ttype:%d\t\tind:%d\t\tfd:%d\n",lst->token,lst->type,lst->ind,lst->fd);
+        printf("token:%s\t\ttype:%d\t\tind:%d\t\tfd:%d\t f_name:%s\n",lst->token,lst->type,lst->ind,lst->fd, lst->f_name);
         lst = lst->next;
     }
 }
