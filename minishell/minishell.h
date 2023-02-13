@@ -102,6 +102,9 @@ void    f_chk_6(char *ptr, t_node **temp, t_par **par);
 void f_h_doc(t_par **par);
 t_h_ret f_h_read(t_par **par, char *dlmt);
 char *f_h_cr_nm(void);
+/*20230213*/
+void f_h_writer_1(int i, int fd, t_par *par, char *chk);
+void	ln_chk(char *line, t_par *par, int fd);
 
 
 
@@ -111,6 +114,8 @@ char	*ft_strtrim(char *str);
 size_t	ft_strlen(const char*s);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 void    lst_add(t_node **lst, char *tok, int type);
+int	ft_strcmp(const char *s1, const char *s2, size_t n);
+
 /*20230114*/
 t_env	*ft_lstnew_env(char *key, char *value);
 void	ft_lstadd_back_env(t_env **lst, t_env *new);

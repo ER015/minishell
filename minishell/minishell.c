@@ -19,12 +19,13 @@ int init(char **envp)
 	
 }
 
-
-
-
 int main  (int argc, char **argv ,char **envp)
 {
-
+	// struct termios t;
+	// tcgetattr(STDIN_FILENO, &t);
+	// t.c_lflag &= ~ECHO;
+	// tcsetattr(STDIN_FILENO, TCSANOW, &t);
+	// signal(SIGQUIT, SIG_IGN);
 	if (argc == 1)
 		init(envp);
 	return(0);

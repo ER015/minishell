@@ -67,7 +67,7 @@ void	fd_clear(t_node **list)
 			if (temp->f_name != NULL)
 			{
 				unlink(temp->f_name);
-				free(list->f_name);
+				free((*list)->f_name);
 			}
 		}
 		temp = temp->next;

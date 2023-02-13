@@ -13,8 +13,8 @@ void f_h_doc(t_par **par)
 			ret = f_h_read(par, list->next->token);
 		if (list->type == 7)
 		{
-		list->fd = ret.fd;
-		list->f_name = ret.f_name;
+			list->fd = ret.fd;
+			list->f_name = ret.f_name;
 		}
 		list = list->next;
 	}
@@ -32,13 +32,13 @@ t_h_ret f_h_read(t_par **par, char *dlmt)
 	fd = open(filename,O_RDWR | O_CREAT, 0600);
 	line = readline(">");
 	len = ft_strlen(line);
-	while (ft_strncmp(dlmt, line,len))
+	while (ft_strcmp(dlmt, line,len))
 	{
 		if (line == NULL)
-			write(fd,"\n",1);
+			break;
 		else
-			write(fd,line,len);
-		write(fd,"\n",1);*
+			ln_chk(line,*par,fd);
+		write(fd,"\n",1);//*
 		line = readline(">");
 		len = ft_strlen(line);
 	}
@@ -70,19 +70,62 @@ char *f_h_cr_nm(void)
 //petqa stugel $ - i pah@ u * ov toxum writein tal chisht parametr
 //ev dup ov kapel miangamic input kam output in misht ashxatuma verjin inputn u output@ 
 // myusneri hamar petq chi dup anel uxaki bacvum pakvum en 
+//heredoc@ grvuma arandzin forkov arandzin processi mej vorpeszi ctrl^C ashxati
 
-char *ln_chk(char *line)
+void	ln_chk(char *line, t_par *par, int fd)
 {
 	char *tmp;
-	char *ret;
-	int v_chk;
+	char *start;
+	int	i;
+	char *chk;
 
-	tmp = line;
-	while (tmp != '\0')
+	start = line;
+	i = 0;
+	while (*start != '\0')
 	{
-		if (*tmp == '$')
-		break ;
-		tmp++;
+		while (*start == ' ')
+			write(fd,start++,1);
+		tmp = start;
+		i = 0;
+		while (*tmp != ' ' &&  *tmp != '\0')
+			{
+				i++;
+				tmp++;
+			}
+		chk = ft_substr(start, 0, i);
+		i = f_var_checker(chk, par);
+		f_h_writer_1(i, fd, par, chk);
+		start += ft_strlen(chk);
+		free(chk);
 	}
-	v_chk = f_var_checker(tmp, par);
 }
+
+void f_h_writer_1(int i, int fd, t_par *par, char *chk)
+{
+	char *prn;
+	char *temp;
+
+	temp = chk;
+	if (i >= 0)
+	{
+		prn = f_env_ind(i, &par);
+		write(fd, prn, ft_strlen(prn));
+	}
+	if (i == -2)
+	{
+		while (*temp != '$' && *temp != '\0')
+			write(fd,temp++,1);
+		if (*temp == '$')
+		{
+			i = f_var_checker(temp, par);
+			f_h_writer_1(i,fd,par,temp);	
+		}
+	}
+}
+
+
+/*
+void f_h_writer_2(char *chk, int i, int fd, char *par)
+{
+
+}*/

@@ -32,7 +32,14 @@ int main_control(char **envp, char *line)
 /*Продалжение контроллера*/
 int control_1(t_par *par)
 {
-	f_h_doc(&par);
+	pid_t	pdt;
+
+	pdt = fork();
+	if(pdt == 0)
+		f_h_doc(&par);
+	wait(0);
+	//#19 stugel a petq process@ vonca pakvel @st dra ete killa gnacel 
+	//signalov stex grel code vor @ chi toxni sharunakvi
 	f_checker_1(&par);
 	f_checker_2(&par);
 	printer_1(*par->list);
