@@ -111,12 +111,17 @@ void f_h_writer_1(int i, int fd, t_par *par, char *chk)
 		prn = f_env_ind(i, &par);
 		write(fd, prn, ft_strlen(prn));
 	}
-	if (i == -2)
+	if(*temp == '$' && (*(temp +1) == '\0' || *(temp + 1) == '$'))
+		{
+			write(fd, "$", 1);
+			f_h_writer_1(i,fd,par,temp + 1);
+		}
+	else if (i == -2)
 	{
 		while (*temp != '$' && *temp != '\0')
 			write(fd,temp++,1);
 		if (*temp == '$')
-		{
+		{		
 			i = f_var_checker(temp, par);
 			f_h_writer_1(i,fd,par,temp);	
 		}

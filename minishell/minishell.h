@@ -105,6 +105,10 @@ char *f_h_cr_nm(void);
 /*20230213*/
 void f_h_writer_1(int i, int fd, t_par *par, char *chk);
 void	ln_chk(char *line, t_par *par, int fd);
+/*20230115*/
+void    f_chk_7(char *ptr, t_node **temp);
+void    f_chk_8(char *ptr, t_node **temp, t_par **par);
+void f_checker_3(t_par **par);
 
 
 

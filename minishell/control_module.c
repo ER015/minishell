@@ -42,6 +42,7 @@ int control_1(t_par *par)
 	//signalov stex grel code vor @ chi toxni sharunakvi
 	f_checker_1(&par);
 	f_checker_2(&par);
+	f_checker_3(&par);
 	printer_1(*par->list);
 	return (0);
 }
